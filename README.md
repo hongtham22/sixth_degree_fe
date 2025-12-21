@@ -131,3 +131,6 @@ The app uses ActionCable to communicate with the Rails backend:
 - Ensure Rails backend is running
 - Check CORS configuration in Rails
 - Verify API endpoints match expected format
+
+
+<img width="1891" height="920" alt="image" src="https://github.com/user-attachments/assets/29d79f35-c7e3-4c0b-862e-b8a7d4667bde" />
