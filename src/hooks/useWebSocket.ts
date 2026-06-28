@@ -113,9 +113,17 @@ export const useWebSocket = () => {
       const isHttps = typeof window !== 'undefined' && window.location.protocol === 'https:';
       const protocol = isHttps ? 'wss' : 'ws';
       const host = typeof window !== 'undefined' ? window.location.host : 'localhost:3000';
+      const viteCableUrl = (import.meta as any).env?.VITE_CABLE_URL?.trim?.();
       const isViteDev = typeof window !== 'undefined' && window.location.port === '5173';
-      const cableUrl = isViteDev ? 'ws://localhost:3000/cable' : `${protocol}://${host}/cable`;
       
+      let cableUrl: string;
+      if (viteCableUrl) {
+        cableUrl = viteCableUrl;
+      } else if (isViteDev) {
+        cableUrl = 'ws://localhost:3000/cable';
+      } else {
+        cableUrl = `${protocol}://${host}/cable`;
+      }
       // Create ActionCable consumer
       console.log('Creating ActionCable connection to:', cableUrl);
       const cable = createConsumer(cableUrl);
